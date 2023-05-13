@@ -25,13 +25,16 @@ indicator_series_ids = {
 
 # Create your views here.
 def get_indicator_data(request, indicator):
-	payload = {
-		'series_id': indicator_series_ids[indicator],
-		'api_key': FRED_API_KEY,
-		'file_type': 'json',
-		'observation_start': '2023-04-01'
-	}
+    try:
+        payload = {
+            'series_id': indicator_series_ids[indicator],
+            'api_key': FRED_API_KEY,
+            'file_type': 'json',
+            'observation_start': '2023-04-01'
+        }
+    except:
+        return HttpResponseNotFound('Page Not Found')
 
-	r = requests.get(fred_api_url, params=payload)
-	data = r.json()
-	return JsonResponse(data)
+    r = requests.get(fred_api_url, params=payload)
+    data = r.json()
+    return JsonResponse(data)
