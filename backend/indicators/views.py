@@ -32,9 +32,9 @@ def get_indicator_data(request, indicator):
             'file_type': 'json',
             'observation_start': '2023-04-01'
         }
+
+        r = requests.get(fred_api_url, params=payload)
+        data = r.json()
+        return JsonResponse(data)
     except:
         return HttpResponseNotFound('Page Not Found')
-
-    r = requests.get(fred_api_url, params=payload)
-    data = r.json()
-    return JsonResponse(data)
