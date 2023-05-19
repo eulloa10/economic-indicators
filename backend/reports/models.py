@@ -6,6 +6,7 @@ from indicators.models import Indicator
 class Subscriber(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     monthly_subscriber = models.BooleanField(default=False)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table="subscribers"
@@ -31,7 +32,7 @@ class Report(models.Model):
     econ_indicator_8_prior = models.OneToOneField(Indicator, on_delete=models.CASCADE, related_name="econ_indicator_8_prior")
     econ_indicator_9 = models.OneToOneField(Indicator, on_delete=models.CASCADE, related_name="econ_indicator_9")
     econ_indicator_9_prior = models.OneToOneField(Indicator, on_delete=models.CASCADE, related_name="econ_indicator_9_prior")
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:

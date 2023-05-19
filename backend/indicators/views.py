@@ -30,11 +30,14 @@ def get_indicator_data(request, indicator):
             'series_id': indicator_series_ids[indicator],
             'api_key': FRED_API_KEY,
             'file_type': 'json',
-            'observation_start': '2023-04-01'
+            'observation_start': '2023-05-01',
+            'observation_end': '2023-05-19',
+            'sort_order': 'desc'
         }
 
         r = requests.get(fred_api_url, params=payload)
         data = r.json()
+        print("RESPONSE", data["observations"][0])
         return JsonResponse(data)
     except:
         return HttpResponseNotFound('Page Not Found')
