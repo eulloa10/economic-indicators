@@ -3,7 +3,8 @@ from django.db import models
 # Create your models here.
 class IndicatorReference(models.Model):
     indicator_series_id = models.CharField(max_length=None, unique=True)
-    indicator_name = models.CharField(max_length=None, unique=True)
+    indicator_full_name = models.CharField(max_length=None, unique=True)
+    indicator_abbr_name = models.CharField(max_length=None, unique=True)
     indicator_description = models.TextField(blank=False, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -32,6 +32,10 @@ class Report(models.Model):
     econ_indicator_8_prior = models.OneToOneField(Indicator, on_delete=models.CASCADE, related_name="econ_indicator_8_prior")
     econ_indicator_9 = models.OneToOneField(Indicator, on_delete=models.CASCADE, related_name="econ_indicator_9")
     econ_indicator_9_prior = models.OneToOneField(Indicator, on_delete=models.CASCADE, related_name="econ_indicator_9_prior")
+    econ_indicator_10 = models.OneToOneField(Indicator, on_delete=models.CASCADE, related_name="econ_indicator_10")
+    econ_indicator_10_prior = models.OneToOneField(Indicator, on_delete=models.CASCADE, related_name="econ_indicator_10_prior")
+    econ_indicator_11 = models.OneToOneField(Indicator, on_delete=models.CASCADE, related_name="econ_indicator_11")
+    econ_indicator_11_prior = models.OneToOneField(Indicator, on_delete=models.CASCADE, related_name="econ_indicator_11_prior")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
