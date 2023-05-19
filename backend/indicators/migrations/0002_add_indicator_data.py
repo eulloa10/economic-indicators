@@ -73,8 +73,6 @@ indicators = {
 }
 
 def add_indicator_data(apps, schema_editor):
-    # We can't import the Person model directly as it may be a newer
-    # version than this migration expects. We use the historical version.
     IndicatorReference = apps.get_model("indicators", "IndicatorReference")
     for indicator in indicators.values():
         new_indicator = IndicatorReference(
