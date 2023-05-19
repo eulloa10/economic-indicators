@@ -4,8 +4,8 @@ from .models import IndicatorReference, Indicator
 # Register your models here.
 
 class IndicatorReferenceAdmin(admin.ModelAdmin):
-  list_filter = ("indicator_name",)
-  list_display = ("indicator_abbr_name", "indicator_name", "indicator_series_id", "indicator_description", "created_at", "updated_at")
+  list_filter = ("indicator_abbr_name",)
+  list_display = ("indicator_abbr_name", "indicator_full_name", "indicator_series_id", "indicator_description", "created_at", "updated_at")
 
 class IndicatorAdmin(admin.ModelAdmin):
   list_filter = ("indicator_date",)
