@@ -5,7 +5,7 @@ from .models import IndicatorReference, Indicator
 
 class IndicatorReferenceAdmin(admin.ModelAdmin):
   list_filter = ("indicator_name",)
-  list_display = ("indicator_name", "indicator_value", "indicator_description", "indicator_date")
+  list_display = ("indicator_name", "indicator_series_id", "indicator_description", "created_at", "updated_at")
 
 class IndicatorAdmin(admin.ModelAdmin):
   list_filter = ("indicator_date",)
