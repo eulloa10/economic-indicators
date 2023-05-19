@@ -8,11 +8,14 @@ class IndicatorReference(models.Model):
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField(auto_now=True)
     class Meta:
-      db_table = "indicator_references"
+        db_table = "indicator_references"
 
 class Indicator(models.Model):
-    # indicator_reference_id as FK
     indicator_value = models.DecimalField(max_digits=10, decimal_places=2)
     indicator_date = models.DateField()
+    indicator_reference = models.ForeignKey(IndicatorReference, on_delete=models.CASCADE)
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "indicators"
