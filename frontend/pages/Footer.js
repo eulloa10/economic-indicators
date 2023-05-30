@@ -8,7 +8,7 @@ function Footer () {
   return (
     <footer className={styles.footer}>
       <ul className={styles.footerList}>
-        <li>2023</li>
+        <li className={styles["footer-year"]}>2023</li>
         <li className={styles.link}>
           <a href="https://github.com/eulloa10" target="_blank">
             <Image className={styles.githubLogo} src={githubLogo} alt="github" />
