@@ -7,6 +7,10 @@
   color: white;
 }
 
+/*
+Navigation left panel
+*/
+
 .nav-site-name {
   height: 100%;
   width: 30%;
@@ -20,6 +24,9 @@
   padding-left: 40px;
 }
 
+/*
+Navigation middle panel
+*/
 .nav-page-options {
   height: 100%;
   width: 40%;
@@ -29,6 +36,24 @@
   /* border: 1px orange solid; */
 }
 
+.nav-links {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-links:hover {
+  height: 64%;
+  width: 100%;
+  color: rgba(155, 155, 155, 0.547);
+}
+
+/*
+Navigation right panel
+*/
+
 .nav-options {
   height: 100%;
   width: 30%;
@@ -36,19 +61,17 @@
   justify-content: flex-end;
   align-items: center;
   padding-right: 40px;
-  /* border: 1px purple solid; */
 }
 
 .user-btn {
-  height: 65%;
-  width: 35%;
+  height: 60%;
+  width: 25%;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   border: 1px white solid;
   border-radius: 18px;
-  padding: 15px;
   cursor: pointer;
 }
 
