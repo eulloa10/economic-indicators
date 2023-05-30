@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 import requests
 import os
+import json
+import ast
+from datetime import date, timedelta
 from dotenv import load_dotenv, find_dotenv
 
 
@@ -23,22 +26,40 @@ indicator_series_ids = {
     'consumer_confidence': 'CSCICP03USM665S'
 }
 
-# Create your views here.
-def get_indicator_data(request, indicator):
-    try:
-        payload = {
-            'series_id': indicator_series_ids[indicator],
-            'api_key': FRED_API_KEY,
-            'file_type': 'json',
-            'observation_start': '2023-01-01',
-            'observation_end': '2023-05-19',
-            'sort_order': 'desc'
-        }
+def standardize_observations(observations):
+    all_queried_obs = {}
+    for obs in observations:
+        date = obs["date"]
+        value = obs["value"]
+        all_queried_obs[date] = value
+    return all_queried_obs
 
+def get_indicator_data(request, indicator):
+    observation_end = date.fromisoformat(request.GET['observation_end'])
+    observation_start = observation_end - timedelta(weeks=24)
+
+    payload = {
+        'api_key': FRED_API_KEY,
+        'file_type': 'json',
+        'observation_start': observation_start,
+        'observation_end': observation_end,
+        'sort_order': 'desc'
+    }
+    """
+    Customer will choose the end date
+
+    For daily -> We will get the most recent item in the list (index 0) and then we will loop through and find the last item of the previous month
+    For monthly -> We will just get the two most recent objects in the list
+    """
+    try:
+        payload['series_id'] = indicator_series_ids[indicator]
         r = requests.get(fred_api_url, params=payload)
         data = r.json()
         # Going to return most recent entry
-        print("RESPONSE", data["observations"][0])
-        return JsonResponse(data)
+        # print("RESPONSE", data["observations"][0])
+        formatted_data = standardize_observations(data['observations'])
+        return JsonResponse({
+            indicator: formatted_data
+        })
     except:
         return HttpResponseNotFound('Page Not Found')
