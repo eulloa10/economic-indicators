@@ -13,7 +13,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border: 1px red solid;
+  /* border: 1px red solid; */
 }
 
 .sotm-logo {
@@ -26,14 +26,38 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  border: 1px orange solid;
+  /* border: 1px orange solid; */
 }
 
 .nav-options {
   height: 100%;
   width: 30%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   align-items: center;
-  border: 1px purple solid;
+  padding-right: 40px;
+  /* border: 1px purple solid; */
+}
+
+.user-btn {
+  height: 65%;
+  width: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: 1px white solid;
+  border-radius: 18px;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.user-icon {
+  height: 100%;
+  width: 100%;
+  /* border: 2px orange solid; */
+}
+
+.sign-in-text {
+  padding-left: 10px;
 }
