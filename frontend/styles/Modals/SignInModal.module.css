@@ -1,0 +1,87 @@
+.signin-modal-container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  color: white;
+  background-color: rgba(214, 214, 214, 0.268);
+  z-index: 1;
+  border: none;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  height: 70%;
+  width: 30%;
+  border-radius: 18px;
+  background-color: white;
+}
+
+.signin-form-title {
+  background-color: white;
+  color: black;
+  align-self: center;
+  padding-top: 60px;
+  font-weight:500;
+}
+
+.signin-data-inputs {
+  width: 100%;
+  height: 35%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px orange solid;
+}
+
+.signin-email-input {
+  height: 50%;
+  width: 80%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* border: 2px green solid; */
+}
+
+.signin-password-input {
+  height: 50%;
+  width: 80%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* border: 2px green solid; */
+}
+
+.signin-labels {
+  height: 25%;
+  width: 100%;
+  color: black;
+  background-color: white;
+  font-weight: 200;
+  font-size: small;
+  /* border: 2px blue solid; */
+}
+
+.signin-input-boxes {
+  height: 35%;
+  color: black;
+  background-color: white;
+  border-radius: 8px;
+  padding: 5px;
+  /* border: 2px purple solid; */
+}
+
+.create-account-link {
+
+}
