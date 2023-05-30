@@ -16,10 +16,11 @@ function SignInModal({setShowSignIn}) {
           <input className={styles['signin-input-boxes']} type="password" name="password" id="password" required/>
         </div>
       </div>
-      <div>
+      <div className={styles['create-account-link-container']}>
         <p className={styles['create-account-link']}>Register as new user</p>
       </div>
-      <button onClick={() => setShowSignIn(false)}>Sign In</button>
+      <button className={styles['signin-submit-btn']} onClick={() => setShowSignIn(false)}>Sign In</button>
+      <button className={styles['signin-submit-btn']} onClick={() => setShowSignIn(false)}>Proceed as Guest</button>
       </form>
     </div>
   )
