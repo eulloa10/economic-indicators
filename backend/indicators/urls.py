@@ -3,5 +3,5 @@ from . import views
 
 
 urlpatterns = [
-    path('indicator/<indicator>', views.get_indicator_data, name='indicators')
+    path('indicator/<indicator>', views.get_fed_indicator_data, name='indicators')
 ]

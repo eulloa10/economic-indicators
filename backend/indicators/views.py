@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
+from .models import Indicator
 import requests
 import os
 import json
@@ -34,7 +35,14 @@ def standardize_observations(observations):
         all_queried_obs[date] = value
     return all_queried_obs
 
-def get_indicator_data(request, indicator):
+"""
+Customer will choose the end date
+
+For daily -> We will get the most recent item in the list (index 0) and then we will loop through and find the last item of the previous month
+For monthly -> We will just get the two most recent objects in the list
+"""
+
+def get_fed_indicator_data(request, indicator):
     observation_end = date.fromisoformat(request.GET['observation_end'])
     observation_start = observation_end - timedelta(weeks=24)
 
@@ -45,18 +53,11 @@ def get_indicator_data(request, indicator):
         'observation_end': observation_end,
         'sort_order': 'desc'
     }
-    """
-    Customer will choose the end date
 
-    For daily -> We will get the most recent item in the list (index 0) and then we will loop through and find the last item of the previous month
-    For monthly -> We will just get the two most recent objects in the list
-    """
     try:
         payload['series_id'] = indicator_series_ids[indicator]
         r = requests.get(fred_api_url, params=payload)
         data = r.json()
-        # Going to return most recent entry
-        # print("RESPONSE", data["observations"][0])
         formatted_data = standardize_observations(data['observations'])
         return JsonResponse({
             indicator: formatted_data
