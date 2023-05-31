@@ -1,0 +1,9 @@
+.dashboard-table {
+  background-color: white;
+  height: 100%;
+  width: 75%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px pink solid;
+}

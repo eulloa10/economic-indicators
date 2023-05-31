@@ -1,10 +1,13 @@
 import styles from '../../styles/Dashboard/DashboardContainer.module.css';
-import DashboardInnerContainer from './DashboardInnerContainer';
+
+import DashboardSidePanel from './DashboardSidePanel';
+import DashboardTable from './DashboardTable';
 
 function DashboardContainer() {
   return (
     <div className={styles['dashboard-container']}>
-      <DashboardInnerContainer />
+      <DashboardSidePanel />
+      <DashboardTable />
     </div>
   )
 }
