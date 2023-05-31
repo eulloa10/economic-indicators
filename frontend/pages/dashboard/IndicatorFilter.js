@@ -4,7 +4,7 @@ function IndicatorFilter() {
   return (
     <div className={styles['indicator-filter-container']}>
       <label className={styles['indicator-select-label']} for="indicator-select">Indicators</label>
-      <select className={styles['indicator-select-box']} name="indicators" id="indicator-select" multiple>
+      <select className={styles['indicator-select-box']} name="indicators" id="indicator-select" multiple required>
         <option className={styles['indicator-select-options']} value="dog">Dog</option>
         <option className={styles['indicator-select-options']} value="cat">Cat</option>
         <option className={styles['indicator-select-options']} value="hamster">Hamster</option>

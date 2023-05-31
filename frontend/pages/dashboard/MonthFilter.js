@@ -5,8 +5,7 @@ function MonthFilter() {
     <div className={styles['month-filter-container']}>
       <label className={styles['month-select-label']} for="month-select">Month</label>
 
-      <select className={styles['month-select-options']} name="months" id="month-select">
-        <option value="">--Please choose an option--</option>
+      <select className={styles['month-select-options']} name="months" id="month-select" required>
         <option value="dog">Dog</option>
         <option value="cat">Cat</option>
         <option value="hamster">Hamster</option>
