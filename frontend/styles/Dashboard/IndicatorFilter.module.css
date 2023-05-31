@@ -1,0 +1,28 @@
+.indicator-filter-container {
+  background-color: white;
+  padding-left: 40px;
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* border: 2px orange solid; */
+}
+
+.indicator-select-label {
+  background-color: white;
+  font-size: medium;
+  margin-bottom: 10px;
+}
+
+.indicator-select-box {
+  background-color: white;
+  height: 80%;
+  width: 75%;
+}
+
+.indicator-select-options {
+  background-color: white;
+  font-size: small;
+  padding: 2px;
+}
