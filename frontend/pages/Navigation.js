@@ -18,6 +18,7 @@ function NavBar () {
         </ul>
         <ul className={styles['nav-page-options']}>
           <Link className={styles['nav-links']} href="/indicators">Indicators</Link>
+          <Link className={styles['nav-links']} href="/dashboard">Dashboard</Link>
           <Link className={styles['nav-links']} href="/reports">Reports</Link>
         </ul>
         <div className={styles['nav-options']}>
