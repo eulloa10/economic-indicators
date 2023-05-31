@@ -17,9 +17,9 @@ function NavBar () {
           <li className={styles['sotm-logo']}>State of the Market</li>
         </ul>
         <ul className={styles['nav-page-options']}>
-          <Link className={styles['nav-links']} href="/indicators">Indicators</Link>
           <Link className={styles['nav-links']} href="/dashboard">Dashboard</Link>
           <Link className={styles['nav-links']} href="/reports">Reports</Link>
+          <Link className={styles['nav-links']} href="/indicators">Indicators</Link>
         </ul>
         <div className={styles['nav-options']}>
           <button onClick={() => setShowSignIn(true)} className={styles['user-btn']}>
