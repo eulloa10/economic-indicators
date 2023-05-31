@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px orange solid;
+  /* border: 2px orange solid; */
 }
 
 .dashboard-small-table {
@@ -17,6 +17,7 @@
 }
 
 .table-header {
+  height: 10%;
   background-color: white;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -30,4 +31,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
