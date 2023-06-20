@@ -35,6 +35,7 @@ def standardize_observations(observations):
         all_queried_obs[date] = value
     return all_queried_obs
 
+
 """
 Customer will choose the end date
 
@@ -61,6 +62,63 @@ def get_fed_indicator_data(request, indicator):
         formatted_data = standardize_observations(data['observations'])
         return JsonResponse({
             indicator: formatted_data
+        })
+    except:
+        return HttpResponseNotFound('Page Not Found')
+
+
+def get_all_fed_indicator_data(request):
+    observation_end = date.fromisoformat(request.GET['observation_end'])
+    observation_start = observation_end - timedelta(weeks=24)
+    all_indicator_data = {}
+
+    payload = {
+        'api_key': FRED_API_KEY,
+        'file_type': 'json',
+        'observation_start': observation_start,
+        'observation_end': observation_end,
+        'sort_order': 'desc'
+    }
+
+    try:
+        for indicator in indicator_series_ids.keys():
+            payload['series_id'] = indicator_series_ids[indicator]
+            r = requests.get(fred_api_url, params=payload)
+            data = r.json()
+            formatted_data = standardize_observations(data['observations'])
+            all_indicator_data[indicator] = formatted_data
+        return JsonResponse({
+            "indicators": all_indicator_data
+        })
+    except:
+        return HttpResponseNotFound('Page Not Found')
+
+def get_recent_indicator_data(request):
+    observation_end = date.fromisoformat(request.GET['observation_end'])
+    observation_start = observation_end - timedelta(weeks=24)
+    recent_indicator_data = {}
+
+    payload = {
+        'api_key': FRED_API_KEY,
+        'file_type': 'json',
+        'observation_start': observation_start,
+        'observation_end': observation_end,
+        'sort_order': 'desc'
+    }
+
+    try:
+        for indicator in indicator_series_ids.keys():
+            payload['series_id'] = indicator_series_ids[indicator]
+            r = requests.get(fred_api_url, params=payload)
+            data = r.json()
+            formatted_data = standardize_observations(data['observations'])
+            most_recent_date = list(formatted_data.keys())[0]
+            most_recent_data_point = formatted_data[most_recent_date]
+            recent_indicator_data[indicator] = {
+                most_recent_date: most_recent_data_point
+            }
+        return JsonResponse({
+            "indicators": recent_indicator_data
         })
     except:
         return HttpResponseNotFound('Page Not Found')
