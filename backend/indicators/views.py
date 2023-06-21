@@ -89,33 +89,3 @@ def get_all_fed_indicator_data(request):
         })
     except:
         return HttpResponseNotFound('Page Not Found')
-
-def get_recent_indicator_data(request):
-    observation_end = date.today()
-    observation_start = observation_end - timedelta(weeks=24)
-    recent_indicator_data = {}
-
-    payload['observation_start'] = observation_start
-    payload['observation_end'] = observation_end
-
-    try:
-        for indicator in indicator_series_ids.keys():
-            payload['series_id'] = indicator_series_ids[indicator]
-            r = requests.get(fred_api_url, params=payload)
-            data = r.json()
-            formatted_data = standardize_observations(data['observations'])
-            most_recent_period = list(formatted_data.keys())[0]
-            most_recent_data_point = formatted_data[most_recent_period]
-            prior_period = list(formatted_data.keys())[1]
-            prior_period_data_point = formatted_data[prior_period]
-            recent_indicator_data[indicator] = {
-                most_recent_period: most_recent_data_point,
-                prior_period: prior_period_data_point
-            }
-        return JsonResponse({
-            "indicators": recent_indicator_data
-        })
-    except:
-        return HttpResponseNotFound('Page Not Found')
-
-# def create_monthly_report(reportData):
