@@ -3,7 +3,7 @@ import styles from '../../styles/Dashboard/MonthFilter.module.css';
 function MonthFilter() {
   return (
     <div className={styles['month-filter-container']}>
-      <label className={styles['month-select-label']} for="month-select">Month</label>
+      <label className={styles['month-select-label']} htmlFor="month-select">Month</label>
 
       <select className={styles['month-select-options']} name="months" id="month-select" required>
         <option value="dog">Dog</option>

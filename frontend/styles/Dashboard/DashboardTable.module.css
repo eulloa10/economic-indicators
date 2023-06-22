@@ -19,7 +19,7 @@
 .table-header {
   background-color: white;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: [first header-start] 100px [header-end content-start] 1fr [lastline];
   /* border: 1px solid orange; */
 }

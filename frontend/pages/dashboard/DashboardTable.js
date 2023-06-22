@@ -10,16 +10,10 @@ function DashboardTable() {
             Indicator
           </li>
           <li className={styles['table-header-column-names']}>
-            Current Period (CP)
+            Prior Period
           </li>
           <li className={styles['table-header-column-names']}>
-            Prior Period (PP)
-          </li>
-          <li className={styles['table-header-column-names']}>
-            CP Value
-          </li>
-          <li className={styles['table-header-column-names']}>
-            PP Value
+            Current Period
           </li>
           <li className={styles['table-header-column-names']}>
             Delta
