@@ -42,19 +42,18 @@ def standardize_observations(observations):
         all_queried_obs[date] = value
     return all_queried_obs
 
-
 """
 Customer will choose the end date
 
 For daily -> We will get the most recent item in the list (index 0) and then we will loop through and find the last item of the previous month
 For monthly -> We will just get the two most recent objects in the list
 """
-
 def get_fed_indicator_data(request, indicator):
-    observation_end = date.fromisoformat(request.GET['observation_end'])
-    observation_start = observation_end - timedelta(weeks=24)
+    # observation_end = date.fromisoformat(request.GET['observation_end'])
+    observation_end = date.today()
+    # observation_start = observation_end - timedelta(weeks=24)
 
-    payload['observation_start'] = observation_start
+    # payload['observation_start'] = observation_start
     payload['observation_end'] = observation_end
 
     try:
