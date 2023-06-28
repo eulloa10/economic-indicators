@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
-from .models import Indicator
+from .models import Indicator, IndicatorReference
 from reports.models import Report
 import requests
 import os
@@ -8,7 +8,9 @@ import json
 import ast
 from datetime import date, timedelta
 from dotenv import load_dotenv, find_dotenv
-
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import IndicatorSerializer, IndicatorReferenceSerializer
 
 load_dotenv(find_dotenv())
 FRED_API_KEY = os.getenv('FRED_API_KEY')
@@ -42,49 +44,80 @@ def standardize_observations(observations):
         all_queried_obs[date] = value
     return all_queried_obs
 
+@api_view(['GET'])
+def indicator_data(request, indicator):
+
+    print("INDICATOR", indicator)
+    print("REQUEST", request.query_params['date'])
+    payload['observation_end'] = date.today()
+
+    if request.method == 'GET':
+        try:
+            payload['series_id'] = indicator_series_ids[indicator]
+            r = requests.get(fred_api_url, params=payload)
+            data = r.json()
+            formatted_data = standardize_observations(data['observations'])
+            serializer = IndicatorSerializer(formatted_data, many=True)
+            # print("SERIALI: ", serializer)
+            return Response(serializer.data)
+        except:
+            return HttpResponseNotFound('Page Not Found')
+
+@api_view(['GET', 'POST'])
+def indicator_reference_data(request):
+    if request.method == 'GET':
+        try:
+            reference_data = IndicatorReference.objects.all()
+            print(reference_data)
+            serializer = IndicatorReferenceSerializer(reference_data, many=True)
+            return Response(serializer.data)
+        except:
+            return HttpResponseNotFound('Page Not Found')
+
+
 """
 Customer will choose the end date
 
 For daily -> We will get the most recent item in the list (index 0) and then we will loop through and find the last item of the previous month
 For monthly -> We will just get the two most recent objects in the list
 """
-def get_fed_indicator_data(request, indicator):
-    # observation_end = date.fromisoformat(request.GET['observation_end'])
-    observation_end = date.today()
-    # observation_start = observation_end - timedelta(weeks=24)
+# def get_fed_indicator_data(request, indicator):
+#     # observation_end = date.fromisoformat(request.GET['observation_end'])
+#     observation_end = date.today()
+#     # observation_start = observation_end - timedelta(weeks=24)
 
-    # payload['observation_start'] = observation_start
-    payload['observation_end'] = observation_end
+#     # payload['observation_start'] = observation_start
+#     payload['observation_end'] = observation_end
 
-    try:
-        payload['series_id'] = indicator_series_ids[indicator]
-        r = requests.get(fred_api_url, params=payload)
-        data = r.json()
-        formatted_data = standardize_observations(data['observations'])
-        return JsonResponse({
-            indicator: formatted_data
-        })
-    except:
-        return HttpResponseNotFound('Page Not Found')
+#     try:
+#         payload['series_id'] = indicator_series_ids[indicator]
+#         r = requests.get(fred_api_url, params=payload)
+#         data = r.json()
+#         formatted_data = standardize_observations(data['observations'])
+#         return JsonResponse({
+#             indicator: formatted_data
+#         })
+#     except:
+#         return HttpResponseNotFound('Page Not Found')
 
 
-def get_all_fed_indicator_data(request):
-    observation_end = date.today()
-    observation_start = observation_end - timedelta(weeks=24)
-    all_indicator_data = {}
+# def get_all_fed_indicator_data(request):
+#     observation_end = date.today()
+#     observation_start = observation_end - timedelta(weeks=24)
+#     all_indicator_data = {}
 
-    payload['observation_start'] = observation_start
-    payload['observation_end'] = observation_end
+#     payload['observation_start'] = observation_start
+#     payload['observation_end'] = observation_end
 
-    try:
-        for indicator in indicator_series_ids.keys():
-            payload['series_id'] = indicator_series_ids[indicator]
-            r = requests.get(fred_api_url, params=payload)
-            data = r.json()
-            formatted_data = standardize_observations(data['observations'])
-            all_indicator_data[indicator] = formatted_data
-        return JsonResponse({
-            "indicators": all_indicator_data
-        })
-    except:
-        return HttpResponseNotFound('Page Not Found')
+#     try:
+#         for indicator in indicator_series_ids.keys():
+#             payload['series_id'] = indicator_series_ids[indicator]
+#             r = requests.get(fred_api_url, params=payload)
+#             data = r.json()
+#             formatted_data = standardize_observations(data['observations'])
+#             all_indicator_data[indicator] = formatted_data
+#         return JsonResponse({
+#             "indicators": all_indicator_data
+#         })
+#     except:
+#         return HttpResponseNotFound('Page Not Found')

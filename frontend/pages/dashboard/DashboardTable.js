@@ -26,17 +26,4 @@ function DashboardTable({ data }) {
   )
 }
 
-export const getStaticProps = async () => {
-  const response = await fetch('localhost:8000/api/indicators/yield_curve');
-  const data = await response.json();
-  console.log('DATAPROPS :>> ', data);
-  console.log('ENTERED')
-
-  return {
-    props: {
-      data
-    }
-  }
-}
-
 export default DashboardTable;
